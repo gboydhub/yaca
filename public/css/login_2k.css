@@ -1,0 +1,28 @@
+body {
+  background-image: url('/images/friends_2k.jpeg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  text-align: center;
+}
+
+.popup_card {
+  background-color: rgba(0, 0, 0, 0.8);
+  border-radius: 10px;
+  box-shadow: 8px 8px 8px rgba(0, 0, 0, 0.5);
+  width: 10em;
+  padding-top: 8px;
+  padding-bottom: 8px;
+
+  font-family: 'Chivo', sans-serif;
+  font-size: 1.7em;
+  color: white;
+  text-align: center;
+}
+
+.title_text {
+  font-size: 2.5em;
+  font-family: 'Satisfy', cursive;
+  text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.5);
+  color: rgb(27, 62, 175);
+}

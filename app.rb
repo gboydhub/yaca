@@ -5,7 +5,7 @@ require_relative 'users.rb'
 enable :sessions
 
 get '/' do
-  erb :test_user
+  erb :login
 end
 
 post '/create_user' do
