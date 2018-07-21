@@ -1,10 +1,7 @@
 require 'minitest/autorun'
-require_relative '../db.rb'
-if File.exist?('../local_env.rb')
-  require_relative '../local_env.rb'
-end
+require_relative '../database.rb'
 
-class TestDb < Minitest::Test
+class TestDatabase < Minitest::Test
   def test_assert_1_equals_1
     assert_equal(1, 1)
   end
@@ -26,6 +23,13 @@ class TestDb < Minitest::Test
 
     result = db.client.query("SELECT CHARSET('abc')")
     assert_equal("utf8", result.first["CHARSET('abc')"])
+    db.close()
+  end
+
+  def test_db_quick_connect
+    db = DataBase.new
+    db.connect()
+    assert_equal(true, db.is_active?())
     db.close()
   end
 end
