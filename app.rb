@@ -1,5 +1,5 @@
 require 'sinatra'
-if File.exist?(local_env.rb)
+if File.exist?('local_env.rb')
   require_relative 'local_env.rb'
 end
 
