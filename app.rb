@@ -5,7 +5,6 @@ require_relative 'users.rb'
 enable :sessions
 
 get '/' do
-  
   erb :test_user
 end
 

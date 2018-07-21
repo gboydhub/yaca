@@ -40,13 +40,35 @@ class UserAccount
     false
   end
 
+  def valid_account?(name, pass)
+    @db.connect()
+    if @db.is_active?()
+      name = Sanitize.clean(name)
+      name = @db.client.escape(name)
+      pass = Sanitize.clean(pass)
+      pass = @db.client.escape(pass)
+
+      result = @db.client.query("SELECT `user_id` FROM `users` WHERE name=AES_ENCRYPT('#{name}', #{ENV['AES_KEY']}) AND password=AES_ENCRYPT('#{pass}', #{ENV['AES_KEY']})", :symbolize_keys => true)
+      result.each do |row|
+        @uuid = row[:user_id]
+        if @uuid.length > 0
+          return true
+        end
+      end
+      @error = 'Invalid Username or Password'
+      return false
+    end
+    @error = 'Error connecting to database'
+    return false
+  end
+
   def uuid_valid?(id)
     @db.connect()
     if @db.is_active?()
       id = Sanitize.clean(id)
       id = @db.client.escape(id)
 
-      result = @db.client.query("SELECT `user_id` FROM `users` WHERE user_id='#{id}'")
+      result = @db.client.query("SELECT `user_id` FROM `users` WHERE user_id='#{id}'", :symbolize_keys => true)
       result.each do |row|
         if row[:user_id] == id
           @db.close()
