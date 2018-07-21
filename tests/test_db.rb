@@ -15,8 +15,17 @@ class TestDb < Minitest::Test
 
     db.connect(ENV['RDS_DB_NAME'], ENV['RDS_HOSTNAME'], ENV['RDS_PORT'], ENV['RDS_USERNAME'], ENV['RDS_PASSWORD'])
     assert_equal(true, db.is_active?())
-    
+
     db.close()
     assert_equal(false, db.is_active?())
+  end
+
+  def test_db_client_query
+    db = DataBase.new
+    db.connect(ENV['RDS_DB_NAME'], ENV['RDS_HOSTNAME'], ENV['RDS_PORT'], ENV['RDS_USERNAME'], ENV['RDS_PASSWORD'])
+
+    result = db.client.query("SELECT CHARSET('abc')")
+    assert_equal("utf8", result.first["CHARSET('abc')"])
+    db.close()
   end
 end
