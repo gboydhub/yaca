@@ -1,9 +1,10 @@
+<script src="/js/login.js"></script>
 <div class="popup_card">
-  Login<br><br>
-  <form action="/login" method="post">
-    <input type="text" placeholder="Username" required><br>
-    <input type="password" placeholder="Password" required><br>
-    <br>
-    <button type="submit">Login</button>
+  
+  <form action="/login" method="post"><br>
+    <input type="text" placeholder="Username" class="text_input" id="username" name="username" maxlength="12" required autofocus><br>
+    <input type="password" placeholder="Password" class="text_input" name="password" maxlength="16" required><br>
+    <input type="hidden" placeholder="Confirm Password" class="text_input" id="confirm_box" name="confirm" maxlength="16" required><br>
+    <input type="submit" class="button_input" id="login_button" name="logintype" value="Login"> <input type="button" class="button_input" onclick="newUser();" id="new_button" value="New User">
   </form>
 </div>

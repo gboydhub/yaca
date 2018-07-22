@@ -26,3 +26,25 @@ body {
   text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.5);
   color: rgb(27, 62, 175);
 }
+
+.text_input {
+  border: none;
+  border-bottom: 1px solid white;
+  background-color: rgba(0, 0, 0, 0);
+  color: white;
+  margin-bottom: 7px;
+  width: 11em;
+  height: 2em;
+  outline: none;
+}
+
+.button_input {
+  background-color: rgb(27, 62, 175);
+  color: white;
+  border-radius: 8px;
+  width: 6em;
+  height: 2em;
+  border: none;
+  cursor: pointer;
+  outline: none;
+}
