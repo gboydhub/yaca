@@ -38,6 +38,16 @@ body {
   outline: none;
 }
 
+#confirm_box {
+  height: 0em;
+  overflow: hidden;
+  visibility: hidden;
+  -webkit-transition-timing-function: ease-out;
+  transition-timing-function: ease-out;
+  transition: height 0.6s;
+  -webkit-transition: height 0.6s;
+}
+
 .button_input {
   background-color: rgb(27, 62, 175);
   color: white;
