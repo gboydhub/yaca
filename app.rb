@@ -26,19 +26,19 @@ post '/login' do
   puts "Confirm: #{confirm_pass}"
 
   unless uname == new_user.clean_string(uname) && pass == new_user.clean_string(pass)
-    session[:login_error] = 'Invalid username or password<br>Please only include standard characters'
+    session[:login_error] = 'Invalid username or password<br>Please only include standard characters.'
     redirect '/issue'
   end
   
   uname = new_user.clean_string(uname)
   pass = new_user.clean_string(pass)
 
-  if uname.length < 4
-    session[:login_error] = 'Username must be at least 4 characters.'
+  if uname.length < 4 || uname.length > 12
+    session[:login_error] = 'Username must be between 4 and 12 characters.'
     redirect '/issue'
   end
-  if pass.length < 4
-    session[:login_error] = 'Password must be at least 4 characters.'
+  if pass.length < 4 || pass.length > 16
+    session[:login_error] = 'Password must be between 4 and 16 characters.'
     redirect '/issue'
   end
   
