@@ -122,6 +122,25 @@ class UserAccount
     false
   end
 
+  def contact_update_field(contactid, fieldname, value)
+    unless uuid_valid?(@uuid)
+      @error = "Invalid USER"
+      return false
+    end
+
+    pre_connect()
+    if @db.is_active?()
+      fieldname = clean_string(fieldname)
+      value = clean_string(value)
+      contactid = clean_string(contactid)
+
+      @db.client.query("UPDATE `contacts` SET `#{fieldname}`='#{value}' WHERE id='#{contactid}' AND owner='#{@uuid}'")
+      return true
+    end
+    @error = "Error connecting to database"
+    false
+  end
+
   attr_reader :error
   attr_reader :uuid
 end
