@@ -19,6 +19,7 @@ class DataBase
     @db_port = port
     @db_uname = uname
     @db_pass = pass
+    p ENV['INSTANCE_LOC']
     @client = Mysql2::Client.new(:host => host, :username => uname, :password => pass, :port => port, database: dbname)
   end
 
