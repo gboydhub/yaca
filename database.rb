@@ -20,7 +20,7 @@ class DataBase
     @db_uname = uname
     @db_pass = pass
     p ENV['INSTANCE_LOC']
-    @client = Mysql2::Client.new(:host => host, :username => uname, :password => pass, :port => port, database: dbname, sslca: 'config/rds-ca-2015-us-east-1.pem')
+    @client = Mysql2::Client.new(:host => host, :username => uname, :password => pass, :port => port, database: dbname, sslca: '/config/rds-ca-2015-us-east-1.pem')
   end
 
   def close
