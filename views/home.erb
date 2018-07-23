@@ -1,9 +1,21 @@
 <link href="/css/home_2k.css" rel="stylesheet">
 <script src="/js/home.js"></script>
-<div id="top_nav"><button name="logout" id="logout">x</button></div>
+<div id="top_nav"><form action="logout" method="post">
+    <button name="logout" id="logout" onclick="logout()">x</button>
+</form></div>
 <table width=100%><tr>
     <td width=20%><div id="contact_list">
-    
+        <form action="view" method="post">
+            <% contacts.each do |item| %>
+                <button name="view" value="<%= item[:id] %>"><%= item[:name] %></button><br>
+            <% end %>
+        </form>
     </div></td>
-    <td><div id="contact_info">a</div></td>
+    <td><div id="contact_info">
+        <% contacts.each do |item| %>
+            <% if item[:id] == current_view.to_i %>
+                <%= item[:name] %>
+            <% end %>
+        <% end %>
+    </div></td>
 </tr></table>

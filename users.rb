@@ -73,6 +73,7 @@ class UserAccount
       result.each do |row|
         if row[:user_id] == id
           @db.close()
+          @uuid = id
           return true
         end
       end

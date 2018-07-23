@@ -10,7 +10,7 @@ get '/' do
   if check_user.uuid_valid?(session[:uuid])
     redirect '/home'
   end
-  
+
   erb :login
 end
 
@@ -19,12 +19,21 @@ get '/issue' do
   erb :login, locals: {error_msg: error}
 end
 
+post '/view' do
+  viewing = params['view'] || '-1'
+  session[:viewing] = viewing
+  puts "Params: #{params}"
+  redirect '/home'
+end
+
 get '/home' do
   cur_user = UserAccount.new
-  contact_list = cur_user.get_contacts()
-  contact_list.each do |item|
+  unless cur_user.uuid_valid?(session[:uuid])
+    redirect '/'
   end
-  erb :home
+  contact_list = cur_user.get_contacts()
+  viewing = session[:viewing] || '-1'
+  erb :home, locals: {contacts: contact_list, current_view: viewing}
 end
 
 post '/login' do
