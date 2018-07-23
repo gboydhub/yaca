@@ -33,17 +33,11 @@ class UserAccount
       end
       @db.client.query("INSERT INTO users (`name`, `password`, `user_id`) VALUES (AES_ENCRYPT('#{name}', #{ENV['AES_KEY']}), AES_ENCRYPT('#{pass}', #{ENV['AES_KEY']}), UUID())", :symbolize_keys => true)
       
-      @result = @db.client.query("SELECT `user_id` FROM `users` WHERE name=AES_ENCRYPT('#{name}', #{ENV['AES_KEY']}) AND password=AES_ENCRYPT('#{pass}', #{ENV['AES_KEY']})", :symbolize_keys => true)
-      result.each do |row|
-        if row[:user_id].length > 0
-          @uuid = row[:user_id]
-        else
-          @db.close()
-          @error = 'Could not create account'
-          return false
-        end
+      if valid_account?(name, pass)
+        return true
       end
-      return true
+
+      @error = 'Could not create account'
     end
 
     @error = 'Error connecting to database'
