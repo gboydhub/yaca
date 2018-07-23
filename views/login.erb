@@ -1,10 +1,17 @@
 <script src="/js/login.js"></script>
 <div class="popup_card">
   
-  <form action="/login" method="post"><br>
+  <form action="login" method="post"><br>
     <input type="text" placeholder="Username" class="text_input" id="username" name="username" maxlength="12" required autofocus><br>
     <input type="password" placeholder="Password" class="text_input" name="password" maxlength="16" required><br>
-    <input type="password" placeholder="Confirm Password" class="text_input" id="confirm_box" name="confirm" maxlength="16" required><br>
+    <input type="password" placeholder="Confirm Password" class="text_input" id="confirm_box" name="confirm" maxlength="16"><br>
     <input type="submit" class="button_input" id="login_button" name="logintype" value="Login"> <input type="button" class="button_input" onclick="newUser();" id="new_button" value="New User">
   </form>
 </div>
+
+
+  <% if defined?(error_msg) %>
+    <div class="popup_card" id="error_out">
+      <%= error_msg %>
+    </div>
+  <% end %>

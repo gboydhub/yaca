@@ -6,15 +6,26 @@ class UserAccount
     @db = DataBase.new
     @error = ''
     @uuid = ''
+    pre_connect()
+  end
+
+  def clean_string(str)
+    str = Sanitize.clean(str)
+    str = @db.client.escape(str)
+  end
+
+  def pre_connect()
+    unless @db.is_active?()
+      @db.connect()
+    end
   end
 
   def create_user(name, pass)
-    @db.connect()
+    pre_connect()
     if @db.is_active?()
-      name = Sanitize.clean(name)
-      pass = Sanitize.clean(pass)
-      name = @db.client.escape(name)
-      pass = @db.client.escape(pass)
+      name = clean_string(name)
+      pass = clean_string(pass)
+
       result = @db.client.query("SELECT `user_id` FROM `users` WHERE name=AES_ENCRYPT('#{name}', #{ENV['AES_KEY']})", :symbolize_keys => true)
       result.each do |row|
         @error = 'User already exists'
@@ -32,7 +43,6 @@ class UserAccount
           return false
         end
       end
-      @db.close()
       return true
     end
 
@@ -41,12 +51,10 @@ class UserAccount
   end
 
   def valid_account?(name, pass)
-    @db.connect()
+    pre_connect()
     if @db.is_active?()
-      name = Sanitize.clean(name)
-      name = @db.client.escape(name)
-      pass = Sanitize.clean(pass)
-      pass = @db.client.escape(pass)
+      name = clean_string(name)
+      pass = clean_string(pass)
 
       result = @db.client.query("SELECT `user_id` FROM `users` WHERE name=AES_ENCRYPT('#{name}', #{ENV['AES_KEY']}) AND password=AES_ENCRYPT('#{pass}', #{ENV['AES_KEY']})", :symbolize_keys => true)
       result.each do |row|
@@ -63,10 +71,9 @@ class UserAccount
   end
 
   def uuid_valid?(id)
-    @db.connect()
+    pre_connect()
     if @db.is_active?()
-      id = Sanitize.clean(id)
-      id = @db.client.escape(id)
+      id = clean_string(id)
 
       result = @db.client.query("SELECT `user_id` FROM `users` WHERE user_id='#{id}'", :symbolize_keys => true)
       result.each do |row|

@@ -58,3 +58,10 @@ body {
   cursor: pointer;
   outline: none;
 }
+
+#error_out {
+  color: red;
+  font-size: 1em;
+  margin-top: 15px;
+  width: 20rem;
+}

@@ -5,22 +5,47 @@ require_relative 'users.rb'
 enable :sessions
 
 get '/' do
+  session[:login_error] = ''
   erb :login
 end
 
-post '/create_user' do
-  uname = params[:username]
-  pass = params[:password]
-
-  new_user = UserAccount.new
-  if new_user.create_user(uname, pass) == false
-    session[:login_error] = new_user.error
-    redirect '/'
-  else
-    session[:uuid] = new_user.uuid
-    redirect '/home'
-  end
+get '/issue' do
+  error = session[:login_error] || ''
+  erb :login, locals: {error_msg: error}
 end
 
-# SELECT CAST(AES_DECRYPT(name, AES_KEY) AS CHAR(50)) FROM `users` WHERE id=1
-# SELECT `id` FROM `users` WHERE name=AES_ENCRYPT('testuser', UNHEX(SHA2('Broken Sorceress Hell Cows',512))) AND password=AES_ENCRYPT('testpass', UNHEX(SHA2('Brokeusersn Sorceress Hell Cows',512)))
+get '/home' do
+  "You made it through!<br>Your UUID: #{session[:uuid]}"
+end
+
+post '/login' do
+  new_user = UserAccount.new
+  uname = new_user.clean_string(params[:username])
+  pass = new_user.clean_string(params[:password])
+  confirm_pass = new_user.clean_string(params[:confirm])
+  puts "Confirm: #{confirm_pass}"
+  
+  if params[:logintype] == "Sign Up"    # Trigger create new-user
+    if confirm_pass == pass     # Password Matches
+      if new_user.create_user(uname, pass) == false # Error creating account
+        session[:login_error] = new_user.error
+        redirect '/issue'
+      else
+        session[:uuid] = new_user.uuid  # Created account, login
+        redirect '/home'
+      end
+    else  # Password does not match
+      session[:login_error] = 'Password mis-match'
+      redirect '/issue'
+    end
+
+  else    # Trigger login attempt
+    if new_user.valid_account?(uname, pass) == false  # Invalid login
+      session[:login_error] = new_user.error
+      redirect '/issue'
+    else  # Valid Login
+      session[:uuid] = new_user.uuid  
+      redirect '/home'
+    end
+  end
+end
