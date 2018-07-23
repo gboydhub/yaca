@@ -26,6 +26,11 @@ post '/view' do
   redirect '/home'
 end
 
+post '/logout' do
+  session[:uuid] = ''
+  redirect '/'
+end
+
 get '/home' do
   cur_user = UserAccount.new
   unless cur_user.uuid_valid?(session[:uuid])
