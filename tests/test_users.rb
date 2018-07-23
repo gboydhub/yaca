@@ -23,4 +23,11 @@ class TestUserAccount < Minitest::Test
     assert_equal(false, test_user.valid_account?('giberish', 'asd'))
     assert_equal(false, test_user.uuid_valid?('123'))
   end
+
+  def test_clean_string
+    test_user = UserAccount.new
+    assert_equal("hi", test_user.clean_string("hi"))
+    assert_equal("hi\\'", test_user.clean_string("hi'"))
+    assert_equal("hi", test_user.clean_string("<b>hi"))
+  end
 end
