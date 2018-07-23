@@ -20,10 +20,27 @@ end
 
 post '/login' do
   new_user = UserAccount.new
-  uname = new_user.clean_string(params[:username])
-  pass = new_user.clean_string(params[:password])
+  uname = params[:username]
+  pass = params[:password]
   confirm_pass = new_user.clean_string(params[:confirm])
   puts "Confirm: #{confirm_pass}"
+
+  unless uname == new_user.clean_string(uname) && pass == new_user.clean_string(pass)
+    session[:login_error] = 'Invalid username or password<br>Please only include standard characters'
+    redirect '/issue'
+  end
+  
+  uname = new_user.clean_string(uname)
+  pass = new_user.clean_string(pass)
+
+  if uname.length < 4
+    session[:login_error] = 'Username must be at least 4 characters.'
+    redirect '/issue'
+  end
+  if pass.length < 4
+    session[:login_error] = 'Password must be at least 4 characters.'
+    redirect '/issue'
+  end
   
   if params[:logintype] == "Sign Up"    # Trigger create new-user
     if confirm_pass == pass     # Password Matches
