@@ -30,4 +30,16 @@ class TestUserAccount < Minitest::Test
     assert_equal("hi\\'", test_user.clean_string("hi'"))
     assert_equal("hi", test_user.clean_string("<b>hi"))
   end
+
+  def test_add_contact
+    test_user = UserAccount.new
+    assert_equal(true, test_user.valid_account?('randomacc', 'somepass'))
+    assert_equal(true, test_user.add_new_contact("Jeremy Tong", "555-5555", "123 Lane Street", "25635", "Instructor at Mined Minds."))
+  end
+
+  def test_get_contacts
+    test_user = UserAccount.new
+    assert_equal(true, test_user.valid_account?('randomacc', 'somepass'))
+    test_user.get_contacts()
+  end
 end

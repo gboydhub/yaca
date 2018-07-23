@@ -6,6 +6,11 @@ enable :sessions
 
 get '/' do
   session[:login_error] = ''
+  check_user = UserAccount.new
+  if check_user.uuid_valid?(session[:uuid])
+    redirect '/home'
+  end
+  
   erb :login
 end
 
@@ -15,7 +20,11 @@ get '/issue' do
 end
 
 get '/home' do
-  "You made it through!<br>Your UUID: #{session[:uuid]}"
+  cur_user = UserAccount.new
+  contact_list = cur_user.get_contacts()
+  contact_list.each do |item|
+  end
+  erb :home
 end
 
 post '/login' do

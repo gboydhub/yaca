@@ -81,6 +81,46 @@ class UserAccount
     return false
   end
 
+  def add_new_contact(name, phone, address, zip, notes)
+    unless uuid_valid?(@uuid)
+      @error = "Invalid USER"
+      return false
+    end
+
+    pre_connect()
+    if @db.is_active?()
+      name = clean_string(name)
+      phone = clean_string(phone)
+      address = clean_string(address)
+      zip = clean_string(zip)
+      notes = clean_string(notes)
+
+      @db.client.query("INSERT INTO `contacts` (name, phone, address, zip, notes, owner) VALUES ('#{name}', '#{phone}', '#{address}', '#{zip}', '#{notes}', '#{@uuid}')")
+      return true
+    end
+    @error = "Error connecting to Database"
+    false
+  end
+
+  def get_contacts()
+    unless uuid_valid?(@uuid)
+      @error = "Invalid USER"
+      return false
+    end
+
+    pre_connect()
+    if @db.is_active?()
+      ret_arr = []
+      result = @db.client.query("SELECT * FROM `contacts` WHERE owner='#{@uuid}'", :symbolize_keys => true)
+      result.each do |row|
+        ret_arr << row
+      end
+      return ret_arr
+    end
+    @error = "Error connecting to Database"
+    false
+  end
+
   attr_reader :error
   attr_reader :uuid
 end
