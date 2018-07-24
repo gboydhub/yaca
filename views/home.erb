@@ -1,25 +1,23 @@
 <link href="/css/home_2k.css" rel="stylesheet">
 <script src="/js/home.js"></script>
-<div id="top_nav"><form action="logout" method="post">
-    <button name="logout" id="logout" onclick="logout()">x</button>
-</form></div>
-<table width=100%><tr>
-    <td width=20%><div id="contact_list">
+<div id="contact_list">
         <form action="view" method="post">
             <% contacts.each do |item| %>
-                <button name="view" value="<%= item[:id] %>"><%= item[:name] %></button><br>
+                <button name="view" value="<%= item[:id] %>" class="viewbtn"><%= item[:name] %></button><br>
             <% end %>
         </form>
-    </div></td>
-    <td><div id="contact_info">
+    </div>
+    <div id="contact_info">
+    <form action="logout" method="post">
+        <button name="logout" id="logout" onclick="logout()">✖</button>
+    </form>
         <% contacts.each do |item| %>
             <% if item[:id] == current_view.to_i %>
-                <input type="text" name="contact_name" value="<%= item[:name] %>" disabled> <button>E</button><br>
-                <input type="text" name="contact_phone" value="<%= item[:phone] %>" disabled> <button>E</button><br>
-                <input type="text" name="contact_address" value="<%= item[:address] %>" disabled> <button>E</button><br>
-                <input type="text" name="contact_zip" value="<%= item[:zip] %>" disabled> <button>E</button><br>
-                <textarea name="contact_notes" rows="8" disabled><%= item[:notes] %></textarea> <button>E</button><br>
+                <input type="text" name="contact-name" value="<%= item[:name] %>" disabled> <button>E</button><br>
+                <input type="text" name="contact-phone" value="<%= item[:phone] %>" disabled> <button>E</button><br>
+                <input type="text" name="contact-address" value="<%= item[:address] %>" disabled> <button>E</button><br>
+                <input type="text" name="contact-zip" value="<%= item[:zip] %>" disabled> <button>E</button><br>
+                <textarea name="contact-notes" rows="8" disabled><%= item[:notes] %></textarea> <button>E</button><br>
             <% end %>
         <% end %>
-    </div></td>
-</tr></table>
+    </div>
