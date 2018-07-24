@@ -1,10 +1,15 @@
 <link href="/css/home_2k.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src="/js/home.js"></script>
 <div id="contact_list">
         <form action="view" method="post">
             <% contacts.each do |item| %>
                 <button name="view" value="<%= item[:id] %>" class="viewbtn"><%= item[:name] %></button><br>
             <% end %>
+        </form>
+        <form action="new" method="post">
+            <button class="viewbtn"><i class="fa fa-plus-circle"></i> Add Contact</button>
         </form>
     </div>
     <div id="contact_info">
@@ -13,11 +18,11 @@
     </form>
         <% contacts.each do |item| %>
             <% if item[:id] == current_view.to_i %>
-                <input type="text" name="contact-name" value="<%= item[:name] %>" disabled> <button>E</button><br>
-                <input type="text" name="contact-phone" value="<%= item[:phone] %>" disabled> <button>E</button><br>
-                <input type="text" name="contact-address" value="<%= item[:address] %>" disabled> <button>E</button><br>
-                <input type="text" name="contact-zip" value="<%= item[:zip] %>" disabled> <button>E</button><br>
-                <textarea name="contact-notes" rows="8" disabled><%= item[:notes] %></textarea> <button>E</button><br>
+                <input type="text" onclick="enableInput('name');" class="contact-field" id="contact-name" name="contact-name" value="<%= item[:name] %>" disabled><br>
+                <input type="text" class="contact-field" name="contact-phone" value="<%= item[:phone] %>" disabled><br>
+                <input type="text" class="contact-field" name="contact-address" value="<%= item[:address] %>" disabled><br>
+                <input type="text" class="contact-field" name="contact-zip" value="<%= item[:zip] %>" disabled><br>
+                <textarea class="contact-field" name="contact-notes" rows="8" disabled><%= item[:notes] %></textarea><br>
             <% end %>
         <% end %>
     </div>
