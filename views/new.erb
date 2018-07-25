@@ -17,11 +17,11 @@
         <button name="logout" id="logout" onclick="logout()">✖</button>
     </form>
     <form action="add_contact" method="post">
-        <input type="text" autocomplete="off" class="contact-field" placeholder="Name" id="contact-name" name="contact-name" value=""><br>
-                <input type="text" autocomplete="off" class="contact-field" placeholder="Phone Number" id="contact-phone" name="contact-phone" value=""><br>
-                <input type="text" autocomplete="off" class="contact-field" placeholder="Address" id="contact-address" name="contact-address" value=""><br>
-                <input type="text" autocomplete="off" class="contact-field" placeholder="Zipcode" id="contact-zip" name="contact-zip" value=""><br>
-                <textarea autocomplete="off" class="contact-field" placeholder="Notes" id="contact-notes" name="contact-notes" rows="8"></textarea><br>
+        <input type="text" autocomplete="off" maxlength="40" class="contact-field" placeholder="Name" id="contact-name" name="contact-name" value="" required><br>
+                <input type="text" autocomplete="off" maxlength="20" class="contact-field" placeholder="Phone Number" id="contact-phone" name="contact-phone" value=""><br>
+                <input type="text" autocomplete="off" maxlength="70" class="contact-field" placeholder="Address" id="contact-address" name="contact-address" value=""><br>
+                <input type="text" autocomplete="off" maxlength="8" class="contact-field" placeholder="Zipcode" id="contact-zip" name="contact-zip" value=""><br>
+                <textarea autocomplete="off" class="contact-field" maxlength="700" placeholder="Notes" id="contact-notes" name="contact-notes" rows="8"></textarea><br>
                 <br><button class="savebtn" name="add"><center>Add Contact</center></button>
     </form>
     </div>

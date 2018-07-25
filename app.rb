@@ -78,7 +78,9 @@ post '/edit_contact' do
   contact_id = cur_user.clean_string(params['save'])
   if params['contact-name']
     name = cur_user.clean_string(params['contact-name'])
-    cur_user.contact_update_field(contact_id, 'name', name)
+    if name.length >= 1
+      cur_user.contact_update_field(contact_id, 'name', name)
+    end
   end
 
   if params['contact-phone']
