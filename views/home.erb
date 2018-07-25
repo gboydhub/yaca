@@ -2,7 +2,7 @@
 <link href="https://fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src="/js/home.js"></script>
-<div id="contact_list">
+    <div id="contact_list">
         <form action="view" method="post">
             <% contacts.each do |item| %>
                 <button name="view" value="<%= item[:id] %>" class="viewbtn"><%= item[:name] %></button><br>
@@ -19,11 +19,11 @@
     <form action="edit_contact" method="post">
         <% contacts.each do |item| %>
             <% if item[:id] == current_view.to_i %>
-                <input type="text" class="contact-field" id="contact-name" onblur="disableInput('name');" name="contact-name" value="<%= item[:name] %>" disabled><button type="button" id="edit-name" class="editbtn" onclick="enableInput('name');"><i class="fa fa-edit"></i></button><br>
-                <input type="text" class="contact-field" id="contact-phone" name="contact-phone" onblur="disableInput('phone');" value="<%= item[:phone] %>" disabled><button type="button" id="edit-phone" class="editbtn" onclick="enableInput('phone');"><i class="fa fa-edit"></i></button><br>
-                <input type="text" class="contact-field" id="contact-address" name="contact-address" onblur="disableInput('address');" value="<%= item[:address] %>" disabled><button type="button" id="edit-address" class="editbtn" onclick="enableInput('address');"><i class="fa fa-edit"></i></button><br>
-                <input type="text" class="contact-field" id="contact-zip" name="contact-zip" onblur="disableInput('zip');" value="<%= item[:zip] %>" disabled><button type="button" id="edit-zip" class="editbtn" onclick="enableInput('zip');"><i class="fa fa-edit"></i></button><br>
-                <textarea class="contact-field" id="contact-notes" name="contact-notes" onblur="disableInput('notes');" rows="8" disabled><%= item[:notes] %></textarea><button type="button" id="edit-notes" class="editbtn" onclick="enableInput('notes');"><i class="fa fa-edit"></i></button><br>
+                <input type="text" placeholder="Name" class="contact-field" id="contact-name" onblur="disableInput('name');" name="contact-name" value="<%= item[:name] %>" disabled><button type="button" id="edit-name" class="editbtn" onclick="enableInput('name');"><i class="fa fa-edit"></i></button><br>
+                <input type="text" placeholder="Phone Number" class="contact-field" id="contact-phone" name="contact-phone" onblur="disableInput('phone');" value="<%= item[:phone] %>" disabled><button type="button" id="edit-phone" class="editbtn" onclick="enableInput('phone');"><i class="fa fa-edit"></i></button><br>
+                <input type="text" placeholder="Address" class="contact-field" id="contact-address" name="contact-address" onblur="disableInput('address');" value="<%= item[:address] %>" disabled><button type="button" id="edit-address" class="editbtn" onclick="enableInput('address');"><i class="fa fa-edit"></i></button><br>
+                <input type="text" placeholder="Zip Code" class="contact-field" id="contact-zip" name="contact-zip" onblur="disableInput('zip');" value="<%= item[:zip] %>" disabled><button type="button" id="edit-zip" class="editbtn" onclick="enableInput('zip');"><i class="fa fa-edit"></i></button><br>
+                <textarea placeholder="Notes" class="contact-field" id="contact-notes" name="contact-notes" onblur="disableInput('notes');" rows="8" disabled><%= item[:notes] %></textarea><button type="button" id="edit-notes" class="editbtn" onclick="enableInput('notes');"><i class="fa fa-edit"></i></button><br>
                 <br><button class="savebtn" name="save" value="<%= item[:id] %>"><center>Save</center></button>
             <% end %>
         <% end %>

@@ -34,7 +34,7 @@ class TestUserAccount < Minitest::Test
   def test_add_contact
     test_user = UserAccount.new
     assert_equal(true, test_user.valid_account?('randomacc', 'somepass'))
-    #assert_equal(true, test_user.add_new_contact("Jeremy Tong", "555-5555", "123 Lane Street", "25635", "Instructor at Mined Minds."))
+    #assert_equal(7, test_user.add_new_contact("Jeremy Tong", "555-5555", "123 Lane Street", "25635", "Instructor at Mined Minds."))
   end
 
   def test_get_contacts

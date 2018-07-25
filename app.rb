@@ -31,18 +31,50 @@ post '/logout' do
   redirect '/'
 end
 
+post '/new' do
+  redirect '/new'
+end
+
+get '/new' do
+  cur_user = UserAccount.new
+  unless cur_user.uuid_valid?(session[:uuid])
+    redirect '/'
+  end
+
+  contact_list = cur_user.get_contacts()
+  erb :new, locals: {contacts: contact_list}
+end
+
+post '/add_contact' do
+  cur_user = UserAccount.new
+  unless cur_user.uuid_valid?(session[:uuid])
+    redirect '/'
+  end
+
+  name = cur_user.clean_string(params['contact-name'])
+  phone = cur_user.clean_string(params['contact-phone'])
+  addr = cur_user.clean_string(params['contact-address'])
+  zip = cur_user.clean_string(params['contact-zip'])
+  notes = cur_user.clean_string(params['contact-notes'])
+
+  contact_id = cur_user.add_new_contact(name, phone, addr, zip, notes)
+  if contact_id
+    session[:viewing] = contact_id.to_s
+  end
+
+  redirect '/home'
+end
+
 post '/edit_contact' do
   cur_user = UserAccount.new
   unless cur_user.uuid_valid?(session[:uuid])
     redirect '/'
   end
 
-  p params
   unless params['save']
     redirect '/home'
   end
-  p params['save']
-  
+
   contact_id = cur_user.clean_string(params['save'])
   if params['contact-name']
     name = cur_user.clean_string(params['contact-name'])

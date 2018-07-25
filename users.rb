@@ -73,7 +73,6 @@ class UserAccount
       result = @db.client.query("SELECT `user_id` FROM `users` WHERE user_id='#{id}'", :symbolize_keys => true)
       result.each do |row|
         if row[:user_id] == id
-          @db.close()
           @uuid = id
           return true
         end
@@ -98,7 +97,10 @@ class UserAccount
       notes = clean_string(notes)
 
       @db.client.query("INSERT INTO `contacts` (name, phone, address, zip, notes, owner) VALUES ('#{name}', '#{phone}', '#{address}', '#{zip}', '#{notes}', '#{@uuid}')")
-      return true
+      result = @db.client.query("SELECT LAST_INSERT_ID()")
+      result.each do |row|
+        return row["LAST_INSERT_ID()"]
+      end
     end
     @error = "Error connecting to Database"
     false
