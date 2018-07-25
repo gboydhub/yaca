@@ -115,7 +115,7 @@ class UserAccount
     pre_connect()
     if @db.is_active?()
       ret_arr = []
-      result = @db.client.query("SELECT * FROM `contacts` WHERE owner='#{@uuid}'", :symbolize_keys => true)
+      result = @db.client.query("SELECT * FROM `contacts` WHERE owner='#{@uuid}' ORDER BY name", :symbolize_keys => true)
       result.each do |row|
         ret_arr << row
       end
