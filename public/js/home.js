@@ -28,3 +28,10 @@ function disableInput(name)
 
     document.getElementById("editform").submit();
 }
+
+function parseNotes()
+{
+    var field = document.getElementById("contact-notes");
+    var content = field.innerHTML;
+    field.innerHTML = content.replace(/\\n/g, String.fromCharCode(13, 10));
+}
