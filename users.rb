@@ -10,6 +10,7 @@ class UserAccount
   end
 
   def clean_string(str)
+    pre_connect()
     str = Sanitize.clean(str)
     str = @db.client.escape(str)
   end

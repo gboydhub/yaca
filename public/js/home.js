@@ -4,6 +4,7 @@ function enableInput(name)
     var btn = document.getElementById(`edit-${name}`);
     btn.hidden = true;
     field.removeAttribute("disabled");
+    field.removeAttribute("readonly");
     if(name != "notes")
     {
         field.addEventListener("keydown", function(e) {
@@ -23,5 +24,5 @@ function disableInput(name)
     var field = document.getElementById(`contact-${name}`);
     var btn = document.getElementById(`edit-${name}`);
     btn.hidden = false;
-    field.setAttribute("disabled", "true");
+    field.setAttribute("readonly", "true");
 }

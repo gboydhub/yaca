@@ -31,6 +31,47 @@ post '/logout' do
   redirect '/'
 end
 
+post '/edit_contact' do
+  cur_user = UserAccount.new
+  unless cur_user.uuid_valid?(session[:uuid])
+    redirect '/'
+  end
+
+  p params
+  unless params['save']
+    redirect '/home'
+  end
+  p params['save']
+  
+  contact_id = cur_user.clean_string(params['save'])
+  if params['contact-name']
+    name = cur_user.clean_string(params['contact-name'])
+    cur_user.contact_update_field(contact_id, 'name', name)
+  end
+
+  if params['contact-phone']
+    phone = cur_user.clean_string(params['contact-phone'])
+    cur_user.contact_update_field(contact_id, 'phone', phone)
+  end
+
+  if params['contact-address']
+    addr = cur_user.clean_string(params['contact-address'])
+    cur_user.contact_update_field(contact_id, 'address', addr)
+  end
+
+  if params['contact-zip']
+    zip = cur_user.clean_string(params['contact-zip'])
+    cur_user.contact_update_field(contact_id, 'zip', zip)
+  end
+
+  if params['contact-notes']
+    notes = cur_user.clean_string(params['contact-notes'])
+    cur_user.contact_update_field(contact_id, 'notes', notes)
+  end
+
+  redirect '/home'
+end
+
 get '/home' do
   cur_user = UserAccount.new
   unless cur_user.uuid_valid?(session[:uuid])
