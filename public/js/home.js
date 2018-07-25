@@ -25,4 +25,6 @@ function disableInput(name)
     var btn = document.getElementById(`edit-${name}`);
     btn.hidden = false;
     field.setAttribute("readonly", "true");
+
+    document.getElementById("editform").submit();
 }
