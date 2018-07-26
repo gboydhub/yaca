@@ -36,3 +36,14 @@ function parseNotes()
     content = content.replace(/\\n/g, String.fromCharCode(13, 10));
     field.innerHTML = content.replace(/(?<!\\)\\/g, "");
 }
+
+function clickContact(id)
+{
+    var form = document.getElementById("viewform");
+    var hidden_input = document.createElement("input");
+    hidden_input.type = "hidden";
+    hidden_input.name = "view";
+    hidden_input.value = `${id}`;
+    form.appendChild(hidden_input);
+    form.submit();
+}

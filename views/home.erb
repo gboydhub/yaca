@@ -4,9 +4,14 @@
 <script src="/js/home.js"></script>
 <body onload="parseNotes()">
     <div id="contact_list">
-        <form action="view" method="post">
+        <form action="view" method="post" id="viewform">
             <% contacts.each do |item| %>
-                <button name="view" value="<%= item[:id] %>" class="viewbtn"><%= item[:name] %></button><br>
+                <div id="<%= item[:id] %>" onclick="clickContact('<%= item[:id] %>')" class="viewdiv">
+                    <%= item[:name] %>
+                    <% if current_view.to_i == item[:id] %>
+                        <button name="delete" id="delete">✖</button>
+                    <% end %>
+                </div>
             <% end %>
         </form>
         <form action="new" method="post">

@@ -27,7 +27,8 @@ textarea {
 #logout {
     border: none;
     background-color: rgba(0, 0, 0, 0);
-    color: gray;
+    color: white;
+    text-shadow: 3px 3px rgba(0, 0, 0, 0.8);
     float: right;
     cursor: pointer;
     font-size: 1.2rem;  
@@ -41,7 +42,7 @@ textarea {
     font-size: 1.2rem;  
     outline: none;
     float: right;
-    display: inline-block;
+    margin-right: 4px;
 }
 
 .editbtn {
@@ -70,7 +71,6 @@ textarea {
 input[disabled] {
     cursor: ponter;
 }
-
 .viewbtn {
     border: none;
     background-color: rgb(40, 32, 75);
@@ -88,6 +88,26 @@ input[disabled] {
 
 .viewbtn:hover {
     background-color: rgb(32, 27, 56);
+    cursor: pointer;
+}
+.viewdiv {
+    border: none;
+    background-color: rgb(40, 32, 75);
+    color: white;
+    display: inline-block;
+    text-align: left;
+    border-bottom: 2px;
+    border-color: white;
+    outline: none;
+    padding: 8px;
+    width: 100%;
+    font-family: 'PT Sans', sans-serif;
+    font-size: 1.3rem;
+}
+
+.viewdiv:hover {
+    background-color: rgb(32, 27, 56);
+    cursor: default;
 }
 
 
