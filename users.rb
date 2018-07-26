@@ -106,6 +106,21 @@ class UserAccount
     false
   end
 
+  def delete_contact(id)
+    unless uuid_valid?(@uuid)
+      @error = "Invalid USER"
+      return false
+    end
+
+    pre_connect()
+    if @db.is_active?()
+      @db.client.query("DELETE FROM `contacts` WHERE id='#{id}'")
+      return true
+    end
+    @error = "Error connecting to Database"
+    false
+  end
+
   def get_contacts()
     unless uuid_valid?(@uuid)
       @error = "Invalid USER"

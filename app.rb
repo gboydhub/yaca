@@ -22,6 +22,16 @@ end
 post '/view' do
   viewing = params['view'] || '-1'
   session[:viewing] = viewing
+  unless params['delete'] == nil
+    session[:viewing] = '-1'
+    
+    cur_user = UserAccount.new
+    unless cur_user.uuid_valid?(session[:uuid])
+      redirect '/'
+    end
+    del_id = cur_user.clean_string(params['delete'])
+    cur_user.delete_contact(del_id)
+  end
   puts "Params: #{params}"
   redirect '/home'
 end

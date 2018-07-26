@@ -9,7 +9,7 @@
                 <div id="<%= item[:id] %>" onclick="clickContact('<%= item[:id] %>')" class="viewdiv">
                     <%= item[:name] %>
                     <% if current_view.to_i == item[:id] %>
-                        <button name="delete" id="delete">✖</button>
+                        <button name="delete" id="delete" value="<%= item[:id] %>">✖</button>
                     <% end %>
                 </div>
             <% end %>
