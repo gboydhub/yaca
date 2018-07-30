@@ -18,7 +18,7 @@
     </form>
     <form action="add_contact" method="post">
         <input type="text" autocomplete="off" maxlength="40" class="contact-field" placeholder="Name" id="contact-name" name="contact-name" value="" required><br>
-                <input type="text" autocomplete="off" maxlength="20" class="contact-field" placeholder="Phone Number" id="contact-phone" name="contact-phone" value=""><br>
+                <input type="text" autocomplete="off" maxlength="20" class="contact-field" oninput="phoneListener()"  placeholder="Phone Number" id="contact-phone" name="contact-phone" value=""><br>
                 <input type="text" autocomplete="off" maxlength="70" class="contact-field" placeholder="Address" id="contact-address" name="contact-address" value=""><br>
                 <input type="text" autocomplete="off" maxlength="8" class="contact-field" placeholder="Zipcode" id="contact-zip" name="contact-zip" value=""><br>
                 <textarea autocomplete="off" class="contact-field" maxlength="700" placeholder="Notes" id="contact-notes" name="contact-notes" rows="8"></textarea><br>

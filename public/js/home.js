@@ -29,6 +29,36 @@ function disableInput(name)
     document.getElementById("editform").submit();
 }
 
+function phoneListener()
+{
+    var field = document.getElementById("contact-phone");
+    var data = field.value;
+    var numbers_data = "";
+    for(var i = 0; i < data.length; i++)
+    {
+        if(!isNaN(data[i]) && data[i] != " ")
+        {
+            numbers_data += data[i];
+        }
+    }
+    var final_data = numbers_data;
+
+    if(numbers_data.length >= 8)
+    {
+        final_data = `(${numbers_data.slice(0, 3)}) ${numbers_data.slice(3, 6)}-${numbers_data.slice(6,10)}`;
+    }
+    else if(numbers_data.length > 3)
+    {
+        final_data = `${numbers_data.slice(0, 3)}-${numbers_data.slice(3)}`;
+    }
+    field.value = final_data;
+}
+
+function loadHome()
+{
+    parseNotes();
+}
+
 function parseNotes()
 {
     var field = document.getElementById("contact-notes");
